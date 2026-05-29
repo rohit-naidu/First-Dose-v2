@@ -1,0 +1,89 @@
+@import "tailwindcss";
+
+/* Design tokens — clinical SaaS: white, soft blue, navy headings */
+:root {
+  --color-navy: #1e3a5f;
+  --color-blue-soft: #f0f7ff;
+  --color-blue-accent: #3b82f6;
+  --color-blue-light: #dbeafe;
+  --background: #ffffff;
+  --foreground: #1e293b;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+}
+
+body {
+  background: linear-gradient(180deg, var(--color-blue-soft) 0%, #ffffff 40%);
+  color: var(--foreground);
+  min-height: 100vh;
+}
+
+/* Wizard step entrance animation */
+@keyframes fadeSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-in {
+  animation: fadeSlideIn 0.35s ease-out forwards;
+}
+
+.fade-in {
+  animation-name: fadeSlideIn;
+}
+
+.slide-in-from-bottom-4 {
+  /* used with animate-in */
+}
+
+/* Card gradient used across wizard and report */
+.card-clinical {
+  @apply rounded-2xl border border-blue-100 bg-gradient-to-br from-blue-50 to-white p-6 shadow-sm;
+}
+
+/* Navy headings per spec */
+.heading-navy {
+  color: var(--color-navy);
+}
+
+/* Print styles for clinician PDF export */
+@media print {
+  body {
+    background: white !important;
+  }
+
+  .no-print {
+    display: none !important;
+  }
+
+  .print-break {
+    break-before: page;
+    page-break-before: always;
+  }
+
+  .card-clinical {
+    break-inside: avoid;
+    box-shadow: none;
+    border: 1px solid #e2e8f0;
+  }
+
+  #clinician-report {
+    box-shadow: none !important;
+    border: none !important;
+  }
+
+  #clinician-report header {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+}

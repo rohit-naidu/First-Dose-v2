@@ -1,0 +1,5 @@
+# This data file was generated for GLP-1 Precision Dosing demo testing.
+# rsid	chromosome	position	genotype
+rs10305420	6	39000000	AG
+rs1800437	19	46000000	CT
+rs1234567	1	1000000	AA
