@@ -19,8 +19,7 @@ import { validateStepIndex, validateReportReady } from "@/lib/validation";
 import { finalizeIntake } from "@/lib/reportGenerator";
 import { PRODUCT_POSITIONING } from "@/lib/disclaimers";
 
-const inputClass =
-  "w-full rounded-2xl border-2 border-slate-200 bg-white px-5 py-4 text-lg transition focus:border-blue-400 focus:outline-none focus:ring-4 focus:ring-blue-100";
+const inputClass = "intake-input";
 
 export function IntakeWizard() {
   const router = useRouter();
@@ -220,24 +219,21 @@ export function IntakeWizard() {
       case "welcome":
         return (
           <div className="text-center">
-            <div className="mx-auto mb-6 flex h-20 w-20 items-center justify-center rounded-full bg-gradient-to-br from-blue-500 to-cyan-400 text-white shadow-xl">
-              <Sparkles className="h-10 w-10" />
+            <div className="intake-welcome-icon">
+              <Sparkles className="h-8 w-8" />
             </div>
-            <p className="text-slate-600 leading-relaxed">
+            <p className="leading-relaxed" style={{ fontSize: "0.9rem" }}>
               Takes about 5–7 minutes. One question per screen — tap your answer
               and continue. Your data stays on this device until you generate a
               report.
             </p>
-            <ul className="mt-8 space-y-3 text-left text-sm text-slate-600">
+            <ul className="intake-welcome-list">
               {[
                 "No medical advice — built for your clinician",
                 "Optional genetic upload",
                 "AI meal calorie estimate included",
               ].map((item) => (
-                <li key={item} className="flex gap-3 rounded-xl bg-blue-50/80 px-4 py-3">
-                  <span className="text-blue-500">✓</span>
-                  {item}
-                </li>
+                <li key={item}>{item}</li>
               ))}
             </ul>
           </div>
@@ -302,7 +298,7 @@ export function IntakeWizard() {
                 })
               }
             />
-            <p className="mt-3 text-center text-sm text-slate-400">centimeters (cm)</p>
+            <p className="intake-input-hint">centimeters (cm)</p>
           </div>
         );
 
@@ -323,7 +319,7 @@ export function IntakeWizard() {
                 })
               }
             />
-            <p className="mt-3 text-center text-sm text-slate-400">kilograms (kg)</p>
+            <p className="intake-input-hint">kilograms (kg)</p>
           </div>
         );
 
@@ -454,7 +450,7 @@ export function IntakeWizard() {
                 type="button"
                 onClick={estimateMeal}
                 disabled={mealLoading || !draft.hunger.mealDescription.trim()}
-                className="w-full rounded-2xl bg-gradient-to-r from-amber-500 to-orange-500 py-4 font-semibold text-white shadow-lg disabled:opacity-50"
+                className="intake-btn-primary"
               >
                 {mealLoading ? "Estimating…" : "✨ Estimate calories with AI"}
               </button>
@@ -656,7 +652,7 @@ export function IntakeWizard() {
                 })
               }
             />
-            <p className="mt-3 text-center text-sm text-slate-400">beats per minute</p>
+            <p className="intake-input-hint">beats per minute</p>
           </div>
         );
 
@@ -711,7 +707,7 @@ export function IntakeWizard() {
 
       case "review":
         return (
-          <div className="space-y-4">
+          <div>
             {[
               ["Name", draft.patient.name],
               ["Medication", draft.patient.currentMedicationStatus],
@@ -731,33 +727,37 @@ export function IntakeWizard() {
                   : "Skipped",
               ],
             ].map(([label, val]) => (
-              <div
-                key={label}
-                className="flex justify-between rounded-xl bg-slate-50 px-4 py-3"
-              >
-                <span className="text-slate-500">{label}</span>
-                <span className="font-medium text-slate-800">{val}</span>
-              </div>
+              <dl key={label} className="intake-review-row">
+                <dt>{label}</dt>
+                <dd style={{ margin: 0, fontWeight: 600 }}>{val}</dd>
+              </dl>
             ))}
-            <p className="text-sm text-slate-500 pt-2">{PRODUCT_POSITIONING}</p>
+            <p className="intake-helper" style={{ textAlign: "left", marginTop: "0.75rem" }}>
+              {PRODUCT_POSITIONING}
+            </p>
           </div>
         );
 
       case "generate":
         return (
-          <div className="text-center">
-            <div className="mx-auto mb-6 h-24 w-24 rounded-full bg-gradient-to-br from-blue-500 to-indigo-600 p-1 shadow-xl">
-              <div className="flex h-full w-full items-center justify-center rounded-full bg-white text-4xl">
+          <div className="intake-generate-panel">
+            <div className="intake-welcome-icon" style={{ marginBottom: "1rem" }}>
+              <span style={{ fontSize: "2rem" }} aria-hidden>
                 📄
-              </div>
+              </span>
             </div>
+            <p>
+              Your answers will be scored and formatted as a clinician-ready
+              precision dosing report — same chart style as the final document.
+            </p>
             <button
               type="button"
               onClick={generateReport}
               disabled={generating}
-              className="w-full rounded-2xl bg-gradient-to-r from-blue-600 to-indigo-600 py-5 text-xl font-bold text-white shadow-xl transition hover:brightness-105 disabled:opacity-50"
+              className="intake-btn-generate"
+              style={{ marginTop: "1.25rem" }}
             >
-              {generating ? "Building your report…" : "Generate My Clinician Report"}
+              {generating ? "Building your report…" : "Generate Clinician Report"}
             </button>
           </div>
         );
@@ -772,30 +772,27 @@ export function IntakeWizard() {
   const showNavNext = !isGenerate;
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-[#e8f4fc] via-white to-[#f0f7ff]">
-      <div className="mx-auto max-w-2xl px-4 pb-24 pt-6">
-        <Link
-          href="/"
-          className="no-print mb-4 inline-flex text-sm font-medium text-blue-600 hover:underline"
-        >
+    <div className="intake-clinical-page">
+      <div className="intake-clinical-shell">
+        <div className="intake-clinical-header">
+          <strong>GLP-1 Precision Intake</strong>
+          <span>Confidential · Local storage</span>
+        </div>
+
+        <Link href="/" className="intake-home-link no-print">
           ← Home
         </Link>
 
-        <div className="no-print mb-6 flex flex-wrap items-center justify-between gap-2 rounded-2xl border border-amber-200/80 bg-amber-50/90 px-4 py-2.5 text-xs">
-          <span className="font-medium text-amber-900">Demo pre-filled</span>
-          <div className="flex gap-2">
-            <button
-              type="button"
-              onClick={applyDemo}
-              className="rounded-lg bg-white px-2.5 py-1 font-medium text-amber-800 shadow-sm"
-            >
+        <div className="intake-demo-bar no-print">
+          <span>Demo pre-filled — edit or start fresh</span>
+          <div style={{ display: "flex", gap: "0.35rem", flexWrap: "wrap" }}>
+            <button type="button" onClick={applyDemo} className="intake-btn-back">
               Reset demo
             </button>
-            <button
-              type="button"
-              onClick={jumpToGenerate}
-              className="rounded-lg bg-amber-600 px-2.5 py-1 font-medium text-white"
-            >
+            <button type="button" onClick={loadEmptyForm} className="intake-btn-skip">
+              Empty form
+            </button>
+            <button type="button" onClick={jumpToGenerate} className="intake-btn-continue">
               Skip to report
             </button>
           </div>
@@ -804,19 +801,16 @@ export function IntakeWizard() {
         <WizardProgress
           currentSection={currentStep.section}
           progressPercent={progressPercent}
+          stepNumber={stepIndex + 1}
+          totalSteps={totalSteps}
         />
 
-        <div className="mt-8">
+        <div className="intake-form-card">
           <QuestionScreen {...screenProps}>{renderBody()}</QuestionScreen>
-        </div>
 
-        {error && (
-          <p className="mt-4 rounded-xl bg-red-50 px-4 py-3 text-center text-sm text-red-700">
-            {error}
-          </p>
-        )}
+          {error && <p className="intake-error">{error}</p>}
 
-        {!isGenerate && (
+          {!isGenerate && (
           <WizardNav
             onBack={goBack}
             onNext={
@@ -839,7 +833,8 @@ export function IntakeWizard() {
             onSkip={skipOptional}
             nextLabel={currentStep.id === "welcome" ? "Let's begin" : "Continue"}
           />
-        )}
+          )}
+        </div>
       </div>
     </div>
   );

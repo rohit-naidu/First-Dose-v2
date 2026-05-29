@@ -56,12 +56,8 @@ body {
   color: var(--color-navy);
 }
 
-/* Print styles for clinician PDF export */
+/* Print: see retro-print.css for clinical PDF layout */
 @media print {
-  body {
-    background: white !important;
-  }
-
   .no-print {
     display: none !important;
   }
@@ -69,21 +65,5 @@ body {
   .print-break {
     break-before: page;
     page-break-before: always;
-  }
-
-  .card-clinical {
-    break-inside: avoid;
-    box-shadow: none;
-    border: 1px solid #e2e8f0;
-  }
-
-  #clinician-report {
-    box-shadow: none !important;
-    border: none !important;
-  }
-
-  #clinician-report header {
-    -webkit-print-color-adjust: exact;
-    print-color-adjust: exact;
   }
 }

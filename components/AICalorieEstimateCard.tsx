@@ -20,23 +20,34 @@ export function AICalorieEstimateCard({
     editedCalories !== "" ? editedCalories : estimate.totalCalories;
 
   return (
-    <div className="mt-6 rounded-xl border border-blue-200 bg-white p-5 shadow-sm">
-      <h3 className="text-lg font-semibold text-[#1e3a5f]">AI Calorie Estimate</h3>
-      <p className="mt-2 text-2xl font-bold text-blue-700">
-        ~{displayCal.toLocaleString()} kcal
-      </p>
-      <p className="mt-1 text-sm text-slate-600">
+    <div className="intake-meal-card">
+      <h3>AI calorie estimate</h3>
+      <p className="intake-meal-kcal">~{displayCal.toLocaleString()} kcal</p>
+      <p style={{ fontSize: "0.8rem", marginTop: "0.25rem" }}>
         Confidence:{" "}
-        <span className="capitalize font-medium">{estimate.confidence}</span>
+        <span style={{ fontWeight: 600, textTransform: "capitalize" }}>
+          {estimate.confidence}
+        </span>
       </p>
-      <p className="mt-3 text-slate-700">{estimate.interpretation}</p>
+      <p style={{ marginTop: "0.5rem", fontSize: "0.85rem", lineHeight: 1.45 }}>
+        {estimate.interpretation}
+      </p>
 
       {estimate.items.length > 0 && (
-        <div className="mt-4">
-          <p className="text-sm font-medium text-slate-600">Breakdown:</p>
-          <ul className="mt-2 space-y-1 text-sm text-slate-600">
+        <div style={{ marginTop: "0.65rem" }}>
+          <p
+            style={{
+              fontFamily: "var(--font-mono), monospace",
+              fontSize: "0.65rem",
+              textTransform: "uppercase",
+              letterSpacing: "0.06em",
+            }}
+          >
+            Breakdown
+          </p>
+          <ul style={{ marginTop: "0.35rem", paddingLeft: "1rem", fontSize: "0.8rem" }}>
             {estimate.items.map((item, i) => (
-              <li key={i}>
+              <li key={i} style={{ marginBottom: "0.2rem" }}>
                 {item.food}: ~{item.estimatedCalories} kcal — {item.assumption}
               </li>
             ))}
@@ -44,13 +55,21 @@ export function AICalorieEstimateCard({
         </div>
       )}
 
-      <div className="mt-4">
-        <label className="text-sm font-medium text-slate-700">
+      <div style={{ marginTop: "0.75rem" }}>
+        <label
+          style={{
+            fontFamily: "var(--font-mono), monospace",
+            fontSize: "0.65rem",
+            textTransform: "uppercase",
+            letterSpacing: "0.06em",
+          }}
+        >
           Edit estimate manually (optional)
         </label>
         <input
           type="number"
-          className="mt-1 w-full max-w-xs rounded-lg border border-blue-200 px-3 py-2"
+          className="intake-input"
+          style={{ marginTop: "0.35rem", maxWidth: "12rem" }}
           placeholder={String(estimate.totalCalories)}
           value={editedCalories}
           onChange={(e) =>
@@ -59,7 +78,9 @@ export function AICalorieEstimateCard({
         />
       </div>
 
-      <p className="mt-4 text-xs text-slate-500">{AI_MEAL_DISCLAIMER}</p>
+      <p className="intake-helper" style={{ textAlign: "left", marginTop: "0.65rem" }}>
+        {AI_MEAL_DISCLAIMER}
+      </p>
     </div>
   );
 }

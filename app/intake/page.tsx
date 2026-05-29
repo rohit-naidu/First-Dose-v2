@@ -6,7 +6,10 @@ export default function IntakePage() {
     <main>
       <Suspense
         fallback={
-          <div className="flex min-h-[50vh] items-center justify-center text-slate-500">
+          <div
+            className="intake-clinical-page flex min-h-[50vh] items-center justify-center"
+            style={{ fontFamily: "var(--font-mono), monospace", fontSize: "0.75rem" }}
+          >
             Loading intake…
           </div>
         }

@@ -27,67 +27,44 @@ export default function ReportPage() {
 
   if (intake === null) {
     return (
-      <main className="mx-auto max-w-3xl px-4 py-16 text-center">
-        <p className="text-slate-600">Loading report…</p>
+      <main className="retro-report-page">
+        <p style={{ textAlign: "center", fontFamily: "var(--font-mono)" }}>Loading report…</p>
       </main>
     );
   }
 
   if (!intake) {
     return (
-      <main className="mx-auto max-w-3xl px-4 py-16 text-center">
-        <h1 className="heading-navy text-2xl font-bold">Report not found</h1>
-        <p className="mt-4 text-slate-600">
-          This report may have been opened on a different browser or device.
-          Reports are stored locally on the device where they were created.
+      <main className="retro-report-page">
+        <p style={{ textAlign: "center", fontFamily: "var(--font-mono)" }}>Report not found.</p>
+        <p style={{ textAlign: "center", fontSize: "0.8rem" }}>
+          <Link href="/intake" className="retro-btn">
+            Start new intake
+          </Link>
         </p>
-        <Link
-          href="/intake"
-          className="mt-8 inline-block rounded-xl bg-blue-600 px-6 py-3 text-white"
-        >
-          Start new intake
-        </Link>
       </main>
     );
   }
 
   return (
-    <main className="mx-auto max-w-5xl px-4 py-8 bg-gradient-to-b from-slate-100 to-slate-50 min-h-screen">
-      <div className="no-print mb-8 rounded-2xl border border-green-200 bg-green-50 p-6">
-        <h1 className="text-2xl font-bold text-green-900">
-          Your precision dosing report is ready.
-        </h1>
-        <p className="mt-2 text-green-800">
-          Bring this to your clinician to discuss suggested titration velocity,
-          genetic tolerability signals, phenotype-specific considerations, side-effect
-          prevention, and muscle-preservation support.
-        </p>
-        <div className="mt-6 flex flex-wrap gap-3">
+    <main className="retro-report-page">
+      <div className="retro-report-toolbar no-print">
+        <p>Report ready — clinician copy</p>
+        <div className="retro-report-toolbar-actions">
           <PDFExportButton />
-          <button
-            type="button"
-            onClick={copyLink}
-            className="rounded-xl border border-green-300 bg-white px-6 py-3 font-medium text-green-800 hover:bg-green-100"
-          >
-            {copied ? "Link copied!" : "Share with clinician"}
+          <button type="button" className="retro-btn" onClick={copyLink}>
+            {copied ? "Copied" : "Copy link"}
           </button>
-          <Link
-            href="/intake"
-            className="rounded-xl border border-slate-300 bg-white px-6 py-3 font-medium text-slate-700 hover:bg-slate-50"
-          >
-            Edit answers
-          </Link>
-          <Link
-            href="/intake?step=genetics"
-            className="rounded-xl border border-slate-300 bg-white px-6 py-3 font-medium text-slate-700 hover:bg-slate-50"
-          >
-            Upload genetic file
+          <Link href="/intake" className="retro-btn">
+            Edit intake
           </Link>
         </div>
-        <p className="mt-4 text-xs text-green-700">{SHARE_LINK_LIMITATION}</p>
       </div>
+      <p className="no-print" style={{ maxWidth: "52rem", margin: "0 auto 0.75rem", fontSize: "0.65rem", fontFamily: "var(--font-mono)" }}>
+        {SHARE_LINK_LIMITATION}
+      </p>
 
-      <ClinicianReportPreview intake={intake} />
+      <ClinicianReportPreview intake={intake} showActions={false} />
     </main>
   );
 }

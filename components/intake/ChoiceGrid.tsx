@@ -22,9 +22,7 @@ export function ChoiceGrid({
 }: ChoiceGridProps) {
   return (
     <div
-      className={`grid gap-3 ${
-        columns === 2 ? "sm:grid-cols-2" : "grid-cols-1"
-      }`}
+      className={`intake-choice-grid ${columns === 2 ? "intake-choice-grid--2" : ""}`}
     >
       {choices.map((choice) => {
         const selected = value === choice.value;
@@ -33,41 +31,23 @@ export function ChoiceGrid({
             key={choice.value}
             type="button"
             onClick={() => onChange(choice.value)}
-            className={`group relative w-full rounded-2xl border-2 p-4 text-left transition-all duration-200 ${
-              selected
-                ? "border-blue-500 bg-blue-50 shadow-md shadow-blue-100 scale-[1.02]"
-                : "border-slate-200 bg-white hover:border-blue-300 hover:bg-blue-50/40 hover:shadow-sm"
-            }`}
+            className={`intake-choice ${selected ? "intake-choice--selected" : ""}`}
           >
-            <div className="flex items-start gap-3">
+            <div className="intake-choice-inner">
               {choice.emoji && (
-                <span className="text-2xl" aria-hidden>
+                <span className="intake-choice-emoji" aria-hidden>
                   {choice.emoji}
                 </span>
               )}
-              <div className="flex-1">
-                <span
-                  className={`block font-semibold ${
-                    selected ? "text-blue-900" : "text-slate-800"
-                  }`}
-                >
-                  {choice.label}
-                </span>
+              <div className="flex-1 min-w-0">
+                <span className="intake-choice-label">{choice.label}</span>
                 {choice.description && (
-                  <span className="mt-1 block text-sm text-slate-500">
-                    {choice.description}
-                  </span>
+                  <span className="intake-choice-desc">{choice.description}</span>
                 )}
               </div>
-              <span
-                className={`flex h-6 w-6 shrink-0 items-center justify-center rounded-full border-2 transition ${
-                  selected
-                    ? "border-blue-500 bg-blue-500 text-white"
-                    : "border-slate-300 bg-white"
-                }`}
-              >
+              <span className="intake-choice-mark" aria-hidden>
                 {selected && (
-                  <svg className="h-3.5 w-3.5" fill="currentColor" viewBox="0 0 20 20">
+                  <svg width="12" height="12" viewBox="0 0 20 20" fill="currentColor">
                     <path
                       fillRule="evenodd"
                       d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"

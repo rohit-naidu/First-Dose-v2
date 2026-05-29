@@ -21,9 +21,22 @@ function statusLevel(
 
 export function VariantResultCard({ variant }: VariantResultCardProps) {
   return (
-    <div className="rounded-xl border border-blue-100 bg-gradient-to-br from-blue-50/50 to-white p-5">
+    <div
+      className="retro-locus"
+      style={{
+        border: "1px solid #1a1814",
+        background: "#fffef9",
+        padding: "0.65rem 0.75rem",
+      }}
+    >
       <div className="flex flex-wrap items-center justify-between gap-2">
-        <h4 className="font-semibold text-[#1e3a5f]">
+        <h4
+          style={{
+            fontWeight: 700,
+            fontSize: "0.9rem",
+            margin: 0,
+          }}
+        >
           {variant.gene} — {variant.rsid}
         </h4>
         <RiskBadge
@@ -32,12 +45,21 @@ export function VariantResultCard({ variant }: VariantResultCardProps) {
         />
       </div>
       {variant.genotype && (
-        <p className="mt-2 text-sm text-slate-600">
+        <p style={{ marginTop: "0.35rem", fontSize: "0.8rem" }}>
           Genotype: {variant.genotype}
         </p>
       )}
-      <p className="mt-3 text-sm text-slate-700">{variant.interpretation}</p>
-      <p className="mt-2 text-xs text-slate-500 italic">
+      <p style={{ marginTop: "0.5rem", fontSize: "0.85rem", lineHeight: 1.45 }}>
+        {variant.interpretation}
+      </p>
+      <p
+        style={{
+          marginTop: "0.35rem",
+          fontSize: "0.7rem",
+          fontStyle: "italic",
+          color: "#6b6560",
+        }}
+      >
         Should be interpreted by a clinician. Associations are probabilistic.
       </p>
     </div>

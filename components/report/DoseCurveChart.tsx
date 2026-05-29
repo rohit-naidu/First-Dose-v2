@@ -38,7 +38,7 @@ export function DoseCurveChart({ protocol }: DoseCurveChartProps) {
     data.map((v, i) => `${i === 0 ? "M" : "L"} ${toX(i)} ${toY(v)}`).join(" ");
 
   return (
-    <div className="rounded-2xl border border-slate-200 bg-slate-50/80 p-4">
+    <div className="retro-chart rounded-2xl border border-slate-200 bg-slate-50/80 p-4">
       <p className="mb-3 text-sm font-semibold text-slate-700">
         Dose accumulation curve (relative exposure index)
       </p>
@@ -59,8 +59,8 @@ export function DoseCurveChart({ protocol }: DoseCurveChartProps) {
             </text>
           </g>
         ))}
-        <path d={line(standard)} fill="none" stroke="#94a3b8" strokeWidth={2.5} strokeDasharray="6 4" />
-        <path d={line(precision)} fill="none" stroke="#2563eb" strokeWidth={3} />
+        <path d={line(standard)} fill="none" stroke="#6b6560" strokeWidth={2} strokeDasharray="5 4" />
+        <path d={line(precision)} fill="none" stroke="#1a1814" strokeWidth={2.5} />
         {weeks.map((w, i) =>
           i % 2 === 0 ? (
             <text key={w} x={toX(i)} y={h - 8} fontSize={10} fill="#64748b" textAnchor="middle">

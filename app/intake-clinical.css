@@ -1,0 +1,603 @@
+/**
+ * Clinical intake form — matches report aesthetic, patient-friendly UX
+ */
+
+.intake-clinical-page ~ .site-footer-wrap {
+  display: none;
+}
+
+.intake-clinical-page {
+  min-height: 100vh;
+  background: #e8e4da;
+  font-family: var(--font-serif), Georgia, serif;
+  color: #1a1814;
+}
+
+.intake-clinical-shell {
+  max-width: 36rem;
+  margin: 0 auto;
+  padding: 1.25rem 1rem 5rem;
+}
+
+.intake-clinical-header {
+  border: 1px solid #1a1814;
+  background: #1a1814;
+  color: #faf6ec;
+  padding: 0.65rem 0.85rem;
+  margin-bottom: 0.75rem;
+  font-family: var(--font-mono), monospace;
+  font-size: 0.65rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+}
+
+.intake-clinical-header strong {
+  font-family: var(--font-serif), Georgia, serif;
+  font-size: 0.75rem;
+  letter-spacing: 0.04em;
+}
+
+.intake-home-link {
+  font-family: var(--font-mono), monospace;
+  font-size: 0.7rem;
+  color: #1a1814;
+  text-decoration: none;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
+  display: inline-block;
+}
+
+.intake-home-link:hover {
+  text-decoration: underline;
+}
+
+.intake-demo-bar {
+  border: 1px dashed #1a1814;
+  background: #f5f0e4;
+  padding: 0.5rem 0.65rem;
+  margin-bottom: 0.75rem;
+  font-family: var(--font-mono), monospace;
+  font-size: 0.65rem;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.intake-form-card {
+  border: 2px solid #1a1814;
+  background: #faf6ec;
+  background-image: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 23px,
+    rgba(26, 24, 20, 0.03) 23px,
+    rgba(26, 24, 20, 0.03) 24px
+  );
+  padding: 1rem;
+  margin-top: 0.75rem;
+}
+
+/* Progress */
+.intake-progress {
+  border: 1px solid #1a1814;
+  background: #fffef9;
+  padding: 0.65rem 0.75rem;
+  margin-bottom: 0;
+}
+
+.intake-progress__bar {
+  height: 6px;
+  background: #e8e4da;
+  border: 1px solid #1a1814;
+  overflow: hidden;
+}
+
+.intake-progress__fill {
+  height: 100%;
+  background: #1a1814;
+  transition: width 0.4s ease;
+}
+
+.intake-progress__meta {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 0.35rem;
+  font-family: var(--font-mono), monospace;
+  font-size: 0.6rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.intake-progress__sections {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 0.5rem;
+  gap: 2px;
+  overflow-x: auto;
+}
+
+.intake-progress__dot {
+  flex: 1;
+  min-width: 0;
+  text-align: center;
+  padding-top: 0.35rem;
+  border-top: 2px solid #d4cfc4;
+}
+
+.intake-progress__dot--done {
+  border-top-color: #1a1814;
+}
+
+.intake-progress__dot--active {
+  border-top-width: 3px;
+  border-top-color: #1a1814;
+}
+
+.intake-progress__dot span {
+  display: block;
+  font-family: var(--font-mono), monospace;
+  font-size: 0.55rem;
+  text-transform: uppercase;
+  margin-top: 0.2rem;
+  color: #6b6560;
+}
+
+.intake-progress__dot--active span {
+  color: #1a1814;
+  font-weight: 700;
+}
+
+/* Question screen */
+.intake-question {
+  animation: intakeFade 0.3s ease;
+}
+
+@keyframes intakeFade {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.intake-section-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  border: 1px solid #1a1814;
+  background: #1a1814;
+  color: #faf6ec;
+  padding: 0.25rem 0.6rem;
+  font-family: var(--font-mono), monospace;
+  font-size: 0.65rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 0.75rem;
+}
+
+.intake-question-head {
+  display: flex;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+  align-items: flex-start;
+}
+
+.intake-question-icon {
+  width: 3rem;
+  height: 3rem;
+  flex-shrink: 0;
+  border: 2px solid #1a1814;
+  background: #fffef9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.35rem;
+}
+
+.intake-question-title {
+  font-size: 1.35rem;
+  font-weight: 700;
+  line-height: 1.25;
+  margin: 0;
+}
+
+.intake-question-subtitle {
+  font-size: 0.85rem;
+  margin: 0.4rem 0 0;
+  line-height: 1.45;
+  color: #3d3a35;
+}
+
+.intake-answer-panel {
+  border: 1px solid #1a1814;
+  background: #fffef9;
+  padding: 1rem;
+}
+
+.intake-helper {
+  margin-top: 0.65rem;
+  font-size: 0.75rem;
+  font-style: italic;
+  color: #5c574f;
+  text-align: center;
+}
+
+/* Inputs */
+.intake-input,
+.intake-textarea {
+  width: 100%;
+  border: 1px solid #1a1814;
+  background: #fffef9;
+  padding: 0.65rem 0.75rem;
+  font-size: 1rem;
+  font-family: var(--font-serif), Georgia, serif;
+  color: #1a1814;
+  border-radius: 0;
+}
+
+.intake-input:focus,
+.intake-textarea:focus {
+  outline: 2px solid #1a1814;
+  outline-offset: 2px;
+  background: #fffef9;
+}
+
+.intake-textarea {
+  min-height: 9rem;
+  line-height: 1.5;
+  resize: vertical;
+}
+
+.intake-input-hint {
+  margin-top: 0.35rem;
+  font-family: var(--font-mono), monospace;
+  font-size: 0.65rem;
+  color: #6b6560;
+  text-align: center;
+}
+
+/* Choice cards */
+.intake-choice {
+  width: 100%;
+  text-align: left;
+  border: 1px solid #1a1814;
+  background: #fffef9;
+  padding: 0.75rem 0.85rem;
+  cursor: pointer;
+  transition: background 0.15s, box-shadow 0.15s;
+}
+
+.intake-choice:hover {
+  background: #f5f0e4;
+  box-shadow: 2px 2px 0 #1a1814;
+}
+
+.intake-choice--selected {
+  background: #1a1814;
+  color: #faf6ec;
+  box-shadow: 3px 3px 0 #6b6560;
+}
+
+.intake-choice--selected .intake-choice-desc {
+  color: rgba(250, 246, 236, 0.8);
+}
+
+.intake-choice-inner {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.65rem;
+}
+
+.intake-choice-emoji {
+  font-size: 1.35rem;
+  line-height: 1;
+}
+
+.intake-choice-label {
+  font-weight: 600;
+  font-size: 0.95rem;
+  display: block;
+}
+
+.intake-choice-desc {
+  font-size: 0.8rem;
+  margin-top: 0.15rem;
+  display: block;
+  color: #5c574f;
+}
+
+.intake-choice-mark {
+  width: 1.25rem;
+  height: 1.25rem;
+  flex-shrink: 0;
+  border: 2px solid currentColor;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: auto;
+}
+
+.intake-choice--selected .intake-choice-mark {
+  background: #faf6ec;
+  color: #1a1814;
+  border-color: #faf6ec;
+}
+
+.intake-choice-grid {
+  display: grid;
+  gap: 0.5rem;
+}
+
+.intake-choice-grid--2 {
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 480px) {
+  .intake-choice-grid--2 {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+/* Welcome */
+.intake-welcome-icon {
+  width: 4rem;
+  height: 4rem;
+  margin: 0 auto 1rem;
+  border: 2px solid #1a1814;
+  background: #1a1814;
+  color: #faf6ec;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.intake-welcome-list {
+  list-style: none;
+  padding: 0;
+  margin: 1rem 0 0;
+  text-align: left;
+}
+
+.intake-welcome-list li {
+  border: 1px solid #1a1814;
+  border-top: none;
+  padding: 0.5rem 0.65rem;
+  font-size: 0.85rem;
+  background: #fffef9;
+  display: flex;
+  gap: 0.5rem;
+}
+
+.intake-welcome-list li:first-child {
+  border-top: 1px solid #1a1814;
+}
+
+.intake-welcome-list li::before {
+  content: "✓";
+  font-family: var(--font-mono), monospace;
+  font-weight: 700;
+}
+
+/* Buttons */
+.intake-btn-primary {
+  width: 100%;
+  margin-top: 0.65rem;
+  padding: 0.65rem 1rem;
+  border: 2px solid #1a1814;
+  background: #1a1814;
+  color: #faf6ec;
+  font-family: var(--font-mono), monospace;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.intake-btn-primary:hover:not(:disabled) {
+  background: #333;
+}
+
+.intake-btn-primary:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.intake-nav {
+  margin-top: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+@media (min-width: 480px) {
+  .intake-nav {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .intake-nav-actions {
+    flex-direction: row;
+  }
+}
+
+.intake-nav-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.intake-btn-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.55rem 0.85rem;
+  border: 1px solid #1a1814;
+  background: #fffef9;
+  font-family: var(--font-mono), monospace;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  cursor: pointer;
+  color: #1a1814;
+}
+
+.intake-btn-back:hover:not(:disabled) {
+  background: #f5f0e4;
+}
+
+.intake-btn-back:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+.intake-btn-continue {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+  padding: 0.65rem 1.25rem;
+  border: 2px solid #1a1814;
+  background: #1a1814;
+  color: #faf6ec;
+  font-family: var(--font-mono), monospace;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.intake-btn-continue:hover {
+  background: #333;
+}
+
+.intake-btn-skip {
+  padding: 0.55rem 0.85rem;
+  border: 1px dashed #6b6560;
+  background: transparent;
+  font-family: var(--font-mono), monospace;
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  color: #5c574f;
+  cursor: pointer;
+}
+
+.intake-btn-skip:hover {
+  border-style: solid;
+  color: #1a1814;
+}
+
+.intake-btn-generate {
+  width: 100%;
+  padding: 0.85rem;
+  border: 3px solid #1a1814;
+  background: #1a1814;
+  color: #faf6ec;
+  font-family: var(--font-serif), Georgia, serif;
+  font-size: 1.1rem;
+  font-weight: 700;
+  cursor: pointer;
+  letter-spacing: 0.02em;
+}
+
+.intake-btn-generate:hover:not(:disabled) {
+  background: #2a2a2a;
+}
+
+.intake-error {
+  margin-top: 0.65rem;
+  padding: 0.5rem 0.65rem;
+  border: 1px solid #8b2500;
+  background: #fff5f0;
+  font-size: 0.8rem;
+  color: #8b2500;
+  text-align: center;
+}
+
+/* Meal estimate card */
+.intake-meal-card {
+  margin-top: 0.75rem;
+  border: 1px solid #1a1814;
+  background: #f5f0e4;
+  padding: 0.75rem;
+}
+
+.intake-meal-card h3 {
+  font-family: var(--font-mono), monospace;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin: 0 0 0.35rem;
+}
+
+.intake-meal-kcal {
+  font-family: var(--font-mono), monospace;
+  font-size: 1.75rem;
+  font-weight: 700;
+}
+
+/* Genetic upload in intake */
+.intake-upload-zone {
+  border: 2px dashed #1a1814;
+  background: #fffef9;
+  padding: 2rem 1rem;
+  text-align: center;
+}
+
+.intake-upload-zone--active {
+  background: #f0ebe0;
+}
+
+.intake-upload-zone label.intake-btn-primary {
+  display: inline-block;
+  width: auto;
+  margin-top: 0.75rem;
+}
+
+.intake-genetic-results .retro-locus,
+.intake-genetic-results .rounded-2xl {
+  border-radius: 0 !important;
+}
+
+.intake-review-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.5rem;
+  padding: 0.4rem 0;
+  border-bottom: 1px solid #d4cfc4;
+  font-size: 0.85rem;
+}
+
+.intake-review-row:last-child {
+  border-bottom: none;
+}
+
+.intake-review-row dt {
+  font-family: var(--font-mono), monospace;
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  color: #6b6560;
+}
+
+.intake-generate-panel {
+  text-align: center;
+  padding: 0.5rem 0;
+}
+
+.intake-generate-panel p {
+  font-size: 0.9rem;
+  line-height: 1.5;
+}

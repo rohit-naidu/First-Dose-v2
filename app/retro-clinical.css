@@ -1,0 +1,642 @@
+/**
+ * Retro clinical report — screen + print
+ * Plain chart-record / laboratory form (not decorative)
+ */
+
+/* Hide global footer on report view */
+.retro-report-page ~ .site-footer-wrap {
+  display: none;
+}
+
+/* Report page shell */
+.retro-report-page {
+  background: #e8e4da;
+  min-height: 100vh;
+  padding: 1.5rem 1rem 3rem;
+  font-family: var(--font-serif), Georgia, "Times New Roman", serif;
+  color: #1a1814;
+}
+
+.retro-report-toolbar {
+  max-width: 52rem;
+  margin: 0 auto 1rem;
+  padding: 0.75rem 1rem;
+  border: 1px solid #1a1814;
+  background: #f5f0e4;
+  font-family: var(--font-mono), "Courier New", monospace;
+  font-size: 0.75rem;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.retro-report-toolbar p {
+  margin: 0;
+  letter-spacing: 0.04em;
+}
+
+.retro-report-toolbar-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.retro-btn {
+  font-family: var(--font-mono), monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 0.45rem 0.75rem;
+  border: 1px solid #1a1814;
+  background: #fffef9;
+  color: #1a1814;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.retro-btn:hover {
+  background: #ebe6d8;
+}
+
+.retro-btn--primary {
+  background: #1a1814;
+  color: #faf6ec;
+}
+
+.retro-btn--primary:hover {
+  background: #333;
+}
+
+/* Main document */
+#clinician-report.retro-clinical-document {
+  position: relative;
+  max-width: 52rem;
+  margin: 0 auto;
+  border: 2px solid #1a1814;
+  background-color: #faf6ec;
+  background-image: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 23px,
+    rgba(26, 24, 20, 0.035) 23px,
+    rgba(26, 24, 20, 0.035) 24px
+  );
+  box-shadow: none;
+  border-radius: 0;
+}
+
+.retro-print-chrome {
+  display: block;
+  padding: 0.75rem 1rem;
+  border-bottom: 2px solid #1a1814;
+  background: #ebe6d8;
+  font-family: var(--font-mono), "Courier New", monospace;
+  font-size: 0.65rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  line-height: 1.5;
+}
+
+.retro-print-chrome__rule {
+  border: none;
+  border-top: 1px solid #1a1814;
+  margin: 0.5rem 0;
+}
+
+.retro-print-chrome__title {
+  font-family: var(--font-serif), Georgia, serif;
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-align: center;
+  margin: 0.35rem 0;
+}
+
+.retro-print-chrome__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.retro-print-stamp {
+  display: inline-block;
+  border: 2px solid #1a1814;
+  color: #1a1814;
+  padding: 0.2rem 0.5rem;
+  font-weight: 700;
+  font-size: 0.65rem;
+  margin: 0.35rem 0.25rem 0 0;
+}
+
+.retro-print-footer {
+  display: none;
+}
+
+#clinician-report .report-masthead {
+  background: #1a1814;
+  color: #faf6ec;
+  padding: 1.25rem 1rem;
+  border-bottom: 3px solid #1a1814;
+}
+
+#clinician-report .report-masthead h1 {
+  font-family: var(--font-serif), Georgia, serif;
+  font-size: 1.35rem;
+  font-weight: 700;
+  line-height: 1.25;
+  margin: 0.5rem 0;
+  border-bottom: 1px solid rgba(250, 246, 236, 0.3);
+  padding-bottom: 0.5rem;
+}
+
+#clinician-report .report-masthead .masthead-label,
+#clinician-report .report-masthead dt {
+  font-family: var(--font-mono), monospace;
+  font-size: 0.6rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  opacity: 0.8;
+}
+
+#clinician-report .report-masthead .masthead-desc {
+  font-size: 0.8rem;
+  line-height: 1.5;
+  margin-top: 0.5rem;
+  max-width: 40rem;
+}
+
+#clinician-report .report-masthead dd {
+  font-family: var(--font-mono), monospace;
+  font-size: 0.75rem;
+  font-weight: 600;
+  margin-top: 0.15rem;
+}
+
+#clinician-report .report-masthead dl {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.75rem;
+  margin-top: 1rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid rgba(250, 246, 236, 0.25);
+}
+
+@media (min-width: 640px) {
+  #clinician-report .report-masthead dl {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+#clinician-report .report-body {
+  padding: 1rem;
+  background: transparent;
+}
+
+.report-section {
+  margin-bottom: 1rem;
+  border: 1px solid #1a1814;
+  background: #fffef9;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+.report-section__head {
+  background: #1a1814;
+  color: #faf6ec;
+  padding: 0.6rem 0.75rem;
+  border-radius: 0;
+}
+
+.report-section__head .section-roman {
+  font-family: var(--font-mono), monospace;
+  font-size: 0.65rem;
+  letter-spacing: 0.15em;
+  display: inline-block;
+  border: 1px solid #faf6ec;
+  padding: 0.1rem 0.35rem;
+  margin-bottom: 0.35rem;
+}
+
+.report-section__head h2 {
+  font-family: var(--font-serif), Georgia, serif;
+  font-size: 1.05rem;
+  font-weight: 700;
+  margin: 0;
+  color: #faf6ec;
+}
+
+.report-section__head .section-subtitle {
+  font-size: 0.75rem;
+  margin-top: 0.35rem;
+  font-style: italic;
+  opacity: 0.85;
+}
+
+.report-section__body {
+  padding: 0.75rem;
+}
+
+/* Velocity readout */
+.retro-velocity {
+  background: #1a1814;
+  color: #faf6ec;
+  border: 2px solid #1a1814;
+  padding: 1rem;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+.retro-velocity .velocity-label {
+  font-family: var(--font-mono), monospace;
+  font-size: 0.65rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.retro-velocity .velocity-value {
+  font-family: var(--font-mono), monospace;
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin: 0.5rem 0;
+  border: 1px solid #faf6ec;
+  display: inline-block;
+  padding: 0.25rem 0.75rem;
+}
+
+.retro-velocity .velocity-protocol {
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.retro-dose-box {
+  border: 1px solid #1a1814;
+  background: #f5f0e4;
+  padding: 0.75rem;
+  border-radius: 0;
+}
+
+.retro-dose-box h4 {
+  font-family: var(--font-mono), monospace;
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin: 0 0 0.5rem;
+}
+
+.retro-dose-box p {
+  font-size: 0.85rem;
+  margin: 0;
+  line-height: 1.45;
+}
+
+.retro-warning {
+  margin-top: 0.5rem;
+  padding: 0.5rem;
+  border: 1px solid #1a1814;
+  font-size: 0.8rem;
+  background: #f5f0e4;
+}
+
+.retro-table-wrap {
+  border: 1px solid #1a1814;
+  overflow-x: auto;
+  margin-top: 0.75rem;
+}
+
+.retro-table-wrap table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.8rem;
+}
+
+.retro-table-wrap th {
+  background: #1a1814;
+  color: #faf6ec;
+  font-family: var(--font-mono), monospace;
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 0.4rem 0.5rem;
+  border: 1px solid #1a1814;
+  text-align: left;
+}
+
+.retro-table-wrap td {
+  border: 1px solid #1a1814;
+  padding: 0.4rem 0.5rem;
+  vertical-align: top;
+  background: #fffef9;
+}
+
+.retro-table-wrap tr:nth-child(even) td {
+  background: #f5f0e4;
+}
+
+.retro-meal-note {
+  border: 1px dashed #1a1814;
+  padding: 0.5rem;
+  font-family: var(--font-mono), monospace;
+  font-size: 0.75rem;
+  margin-bottom: 0.75rem;
+  background: #f5f0e4;
+}
+
+.retro-phenotype {
+  border: 1px solid #1a1814;
+  border-left: 4px solid #1a1814;
+  padding: 0.65rem;
+  margin-bottom: 0.5rem;
+  background: #fffef9;
+}
+
+.retro-phenotype--primary {
+  border-left-width: 6px;
+  background: #f0ebe0;
+}
+
+.retro-phenotype h3 {
+  font-size: 0.95rem;
+  font-weight: 700;
+  margin: 0;
+}
+
+.retro-phenotype .role-tag {
+  font-family: var(--font-mono), monospace;
+  font-size: 0.6rem;
+  border: 1px solid #1a1814;
+  background: #1a1814;
+  color: #faf6ec;
+  padding: 0.1rem 0.3rem;
+  margin-left: 0.35rem;
+  text-transform: uppercase;
+}
+
+.retro-phenotype dt {
+  font-family: var(--font-mono), monospace;
+  font-size: 0.6rem;
+  text-transform: uppercase;
+  margin-top: 0.5rem;
+}
+
+.retro-phenotype dd {
+  font-size: 0.8rem;
+  margin: 0.15rem 0 0;
+  line-height: 1.4;
+}
+
+.retro-locus {
+  border: 1px solid #1a1814;
+  padding: 0.65rem;
+  margin-bottom: 0.5rem;
+  background: #fffef9;
+}
+
+.retro-locus h3 {
+  font-family: var(--font-mono), monospace;
+  font-size: 0.85rem;
+  border-bottom: 1px dashed #1a1814;
+  padding-bottom: 0.35rem;
+  margin: 0 0 0.35rem;
+}
+
+.retro-locus .impact-tag {
+  font-family: var(--font-mono), monospace;
+  font-size: 0.6rem;
+  border: 1px solid #1a1814;
+  padding: 0.15rem 0.35rem;
+  background: #f5f0e4;
+}
+
+.retro-locus .locus-field {
+  border: 1px solid #c4bdb0;
+  padding: 0.4rem;
+  margin-top: 0.35rem;
+  font-size: 0.8rem;
+  background: #f5f0e4;
+}
+
+.retro-locus .locus-field dt {
+  font-family: var(--font-mono), monospace;
+  font-size: 0.6rem;
+  text-transform: uppercase;
+}
+
+.retro-chart {
+  border: 1px solid #1a1814;
+  padding: 0.5rem;
+  background: #fffef9;
+  margin-top: 0.5rem;
+}
+
+.retro-chart p {
+  font-family: var(--font-mono), monospace;
+  font-size: 0.7rem;
+  margin: 0 0 0.35rem;
+}
+
+.retro-safety {
+  border: 2px solid #1a1814;
+  padding: 0.65rem;
+  margin-top: 0.5rem;
+  background: #fffef9;
+}
+
+.retro-safety h3,
+.retro-safety h4 {
+  font-family: var(--font-mono), monospace;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  margin: 0 0 0.35rem;
+}
+
+.retro-safety ul {
+  font-size: 0.8rem;
+  margin: 0.35rem 0 0;
+  padding-left: 1.25rem;
+}
+
+.retro-msk-item {
+  display: flex;
+  gap: 0.5rem;
+  border: 1px solid #1a1814;
+  padding: 0.5rem;
+  margin-bottom: 0.35rem;
+  font-size: 0.8rem;
+  background: #fffef9;
+}
+
+.retro-msk-item .num {
+  font-family: var(--font-mono), monospace;
+  font-weight: 700;
+  min-width: 1.5rem;
+}
+
+.retro-stat-tile {
+  border: 1px solid #1a1814;
+  padding: 0.5rem;
+  text-align: center;
+  font-size: 0.75rem;
+  background: #f5f0e4;
+}
+
+.retro-stat-tile strong {
+  display: block;
+  font-family: var(--font-mono), monospace;
+  font-size: 0.85rem;
+}
+
+.retro-equation-hero {
+  background: #1a1814;
+  color: #faf6ec;
+  padding: 1rem;
+  text-align: center;
+  border: 2px solid #1a1814;
+}
+
+.retro-equation-hero .formula {
+  font-family: var(--font-mono), monospace;
+  font-size: 1.25rem;
+  margin: 0.5rem 0;
+}
+
+.retro-eq-card {
+  border: 1px solid #1a1814;
+  padding: 0.5rem;
+  background: #fffef9;
+}
+
+.retro-eq-card .eq-label {
+  font-family: var(--font-mono), monospace;
+  font-size: 0.6rem;
+  text-transform: uppercase;
+}
+
+.retro-eq-card .eq-value {
+  font-family: var(--font-mono), monospace;
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.retro-eq-card ul {
+  font-size: 0.7rem;
+  margin: 0.35rem 0 0;
+  padding-left: 1rem;
+}
+
+.retro-eq-resolve {
+  border: 2px solid #1a1814;
+  background: #ebe6d8;
+  padding: 0.75rem;
+  text-align: center;
+  font-family: var(--font-mono), monospace;
+  margin-top: 0.75rem;
+}
+
+.retro-eq-resolve .v-result {
+  font-size: 1.75rem;
+  font-weight: 700;
+  text-decoration: underline;
+}
+
+.retro-doc-footer {
+  border-top: 2px solid #1a1814;
+  padding: 0.75rem 1rem;
+  font-size: 0.7rem;
+  text-align: center;
+  font-style: italic;
+  margin-top: 0.5rem;
+}
+
+.retro-notes-section {
+  border: 1px solid #1a1814;
+  padding: 0.75rem;
+  margin-top: 0.75rem;
+  background: #fffef9;
+}
+
+.retro-notes-section h3 {
+  font-family: var(--font-mono), monospace;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  margin: 0 0 0.5rem;
+}
+
+.retro-notes-section textarea {
+  width: 100%;
+  min-height: 5rem;
+  border: 1px solid #1a1814;
+  padding: 0.5rem;
+  font-family: var(--font-mono), monospace;
+  font-size: 0.8rem;
+  background: #f5f0e4;
+  resize: vertical;
+}
+
+.retro-list-plain {
+  font-size: 0.8rem;
+  margin: 0.5rem 0 0;
+  padding-left: 1.25rem;
+  line-height: 1.5;
+}
+
+.retro-chart-legend {
+  font-size: 0.75rem;
+  margin-top: 0.35rem;
+  padding-left: 0;
+  list-style: none;
+}
+
+.retro-chart-legend li {
+  margin-bottom: 0.2rem;
+}
+
+/* Print overrides only */
+@media print {
+  @page {
+    size: letter;
+    margin: 0.55in 0.5in 0.7in 0.5in;
+  }
+
+  .retro-report-page {
+    padding: 0;
+    background: #f3efe4 !important;
+  }
+
+  .retro-report-toolbar,
+  .no-print,
+  .site-footer-wrap {
+    display: none !important;
+  }
+
+  .retro-print-footer {
+    display: block !important;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 0.12in 0.5in;
+    border-top: 1px solid #1a1814;
+    background: #f3efe4;
+    font-family: var(--font-mono), monospace;
+    font-size: 7pt;
+    text-align: center;
+    text-transform: uppercase;
+  }
+
+  .report-section.print-break {
+    break-before: page;
+    page-break-before: always;
+  }
+
+  .retro-print-notes-block {
+    display: block !important;
+    border: 1px solid #1a1814;
+    padding: 0.5rem;
+    margin-top: 0.5rem;
+    font-family: var(--font-mono), monospace;
+    font-size: 0.75rem;
+    white-space: pre-wrap;
+  }
+}

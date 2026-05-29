@@ -1,10 +1,24 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { IBM_Plex_Mono, Inter, Libre_Baskerville } from "next/font/google";
 import "./globals.css";
+import "./retro-clinical.css";
+import "./intake-clinical.css";
 import { SiteFooter } from "@/components/SiteFooter";
 
 const inter = Inter({
   variable: "--font-geist-sans",
+  subsets: ["latin"],
+});
+
+const libreBaskerville = Libre_Baskerville({
+  variable: "--font-serif",
+  weight: ["400", "700"],
+  subsets: ["latin"],
+});
+
+const ibmPlexMono = IBM_Plex_Mono({
+  variable: "--font-mono",
+  weight: ["400", "500", "600", "700"],
   subsets: ["latin"],
 });
 
@@ -21,9 +35,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${inter.variable} font-sans antialiased`}>
+      <body
+        className={`${inter.variable} ${libreBaskerville.variable} ${ibmPlexMono.variable} font-sans antialiased`}
+      >
         {children}
-        <SiteFooter />
+        <div className="site-footer-wrap">
+          <SiteFooter />
+        </div>
       </body>
     </html>
   );
