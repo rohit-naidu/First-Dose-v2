@@ -11,7 +11,7 @@ import { WizardProgress } from "@/components/intake/WizardProgress";
 import { MealDescriptionBox } from "@/components/MealDescriptionBox";
 import { AICalorieEstimateCard } from "@/components/AICalorieEstimateCard";
 import { GeneticUploadCard } from "@/components/GeneticUploadCard";
-import { createEmptyDraft, type IntakeDraft, type MealEstimate } from "@/lib/types";
+import type { IntakeDraft, MealEstimate } from "@/lib/types";
 import { createDemoDraft } from "@/lib/demoData";
 import { getActiveSteps } from "@/lib/intakeSteps";
 import { saveDraft, loadDraft, clearDraft, saveIntake } from "@/lib/storage";
@@ -185,20 +185,6 @@ export function IntakeWizard() {
       setError("Failed to generate report.");
       setGenerating(false);
     }
-  };
-
-  const jumpToGenerate = () => {
-    const idx = activeSteps.findIndex((s) => s.id === "generate");
-    if (idx >= 0) goToStep(idx);
-  };
-
-  const loadEmptyForm = () => {
-    const empty = createEmptyDraft();
-    setDraft(empty);
-    setEditedCalories("");
-    setError(null);
-    setStepIndex(0);
-    saveDraft(empty);
   };
 
   if (!currentStep) return null;
@@ -776,27 +762,11 @@ export function IntakeWizard() {
       <div className="intake-clinical-shell">
         <div className="intake-clinical-header">
           <strong>GLP-1 Precision Intake</strong>
-          <span>Confidential · Local storage</span>
         </div>
 
         <Link href="/" className="intake-home-link no-print">
           ← Home
         </Link>
-
-        <div className="intake-demo-bar no-print">
-          <span>Demo pre-filled — edit or start fresh</span>
-          <div style={{ display: "flex", gap: "0.35rem", flexWrap: "wrap" }}>
-            <button type="button" onClick={applyDemo} className="intake-btn-back">
-              Reset demo
-            </button>
-            <button type="button" onClick={loadEmptyForm} className="intake-btn-skip">
-              Empty form
-            </button>
-            <button type="button" onClick={jumpToGenerate} className="intake-btn-continue">
-              Skip to report
-            </button>
-          </div>
-        </div>
 
         <WizardProgress
           currentSection={currentStep.section}

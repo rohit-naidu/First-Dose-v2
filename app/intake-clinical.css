@@ -29,11 +29,6 @@
   font-size: 0.65rem;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 0.35rem;
 }
 
 .intake-clinical-header strong {
@@ -55,20 +50,6 @@
 
 .intake-home-link:hover {
   text-decoration: underline;
-}
-
-.intake-demo-bar {
-  border: 1px dashed #1a1814;
-  background: #f5f0e4;
-  padding: 0.5rem 0.65rem;
-  margin-bottom: 0.75rem;
-  font-family: var(--font-mono), monospace;
-  font-size: 0.65rem;
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-between;
-  gap: 0.5rem;
 }
 
 .intake-form-card {
